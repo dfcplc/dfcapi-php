@@ -408,7 +408,6 @@ class Dfcapi
 		);
 
 		$data['payer']	=	array(
-			'type'			=> '',
 			'title'			=> $title,
 			'first_name'	=> $first_name,
 			'last_name'		=> $last_name,
@@ -433,10 +432,6 @@ class Dfcapi
 		$data['bank'] = array(
 			'account_number'	=>	$account_number,
 			'sort_code'			=>	$sort_code
-		);
-				
-		$data['cancel'] = array(
-			'cancel_from'   => '',
 		);
 
 		$data['general'] = array(

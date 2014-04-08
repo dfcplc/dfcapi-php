@@ -58,7 +58,7 @@ class DfcapiTest extends PHPUnit_Framework_TestCase
 		$dfcapi->UpdateDirectDebit('TEST-TEST-TEST-TEST','fee78bd3bf59bfb36238b3f67de0a6ea103de130','000101AA0001','','','','','','','','','','','','','','','','','15','012015','','','','','');
 
 		$this->assertEquals(200, $dfcapi->getResponseCode());
-		$this->assertEquals('{"authentication":{"apikey":"TEST-TEST-TEST-TEST","apisecret":"fee78bd3bf59bfb36238b3f67de0a6ea103de130","dfc_ref":"000101AA0001"},"payer":{"type":"","title":"","first_name":"","last_name":"","birth_date":""},"address":{"address1":"","address2":"","address3":"","town":"","county":"","postcode":""},"contact":{"phone":"","mobile":"","email":""},"bank":{"account_number":"","sort_code":""},"cancel":{"cancel_from":""},"general":{"yourref":"","paymentdate":"15","cancel_from":"","installmentduedate":"","installmentamount":"","latepayment":"","applyfrom":"","applyfrom_paydate":"012015","newamount":""}}',$dfcapi->getResponseBody()->data);
+		$this->assertEquals('{"authentication":{"apikey":"TEST-TEST-TEST-TEST","apisecret":"fee78bd3bf59bfb36238b3f67de0a6ea103de130","dfc_ref":"000101AA0001"},"payer":{"title":"","first_name":"","last_name":"","birth_date":""},"address":{"address1":"","address2":"","address3":"","town":"","county":"","postcode":""},"contact":{"phone":"","mobile":"","email":""},"bank":{"account_number":"","sort_code":""},"general":{"yourref":"","paymentdate":"15","cancel_from":"","installmentduedate":"","installmentamount":"","latepayment":"","applyfrom":"","applyfrom_paydate":"012015","newamount":""}}',$dfcapi->getResponseBody()->data);
 	}
 
 
