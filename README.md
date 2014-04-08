@@ -38,7 +38,7 @@ So you're probably wondering how using Unirest makes creating requests in PHP ea
 
 ```php
 $dfcapi = new Dfcapi();
-$response = $dfcapi->checkApiKey('TEST-TEST-TEST-TEST','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
+$response = $dfcapi->CheckApiKey('TEST-TEST-TEST-TEST','a94a8fe5ccb19ba61c4c0873d391e987982fbbd3');
 
 var_dump($response); // API Credential Check Response (true or false)
 ```
