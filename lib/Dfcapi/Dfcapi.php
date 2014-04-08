@@ -437,7 +437,6 @@ class Dfcapi
 		$data['general'] = array(
 			'yourref'		=> $reference,
 			'paymentdate'	=> $paymentdate,
-			'cancel_from'   => '',
 			'installmentduedate'=> $installmentduedate,
 			'installmentamount'		=> $installmentamount ,
 			'latepayment'	=> $latepayment,
