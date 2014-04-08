@@ -1,0 +1,29 @@
+{
+    "name" : "dfcplc/dfcapi-php",
+    "description" : "DFC API - PHP",
+    "keywords" : ["dfc", "direct debit", "dd", "api"],
+    "type" : "library",
+    "homepage" : "https://github.com/dfcplc/dfcapi-php",
+    "license" : "MIT",
+    "authors" : [
+        {
+            "name" : "Debit Finance Collections Plc",
+            "email" : "development@debitfinance.co.uk",
+            "homepage" : "http://debitfinance.co.uk"
+        }
+    ],
+    "require" : {
+        "php" : ">=5.3.0",
+        "ext-curl" : "*",
+        "ext-json" : "*",
+        "mashape/unirest-php" : "dev-master"
+    },
+    "autoload" : {
+        "psr-0" : {
+            "Dfcapi" : "lib"
+        }
+    },
+    "support" : {
+        "email" : "development@debitfinance.co.uk"
+    }
+}
