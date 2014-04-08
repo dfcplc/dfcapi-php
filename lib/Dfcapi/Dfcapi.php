@@ -171,7 +171,7 @@ class Dfcapi
 	 * 
 	 * @return boolean API Access Status (true/false)
 	 */
-	public function checkApiKey($api_key,$api_secret)
+	public function CheckApiKey($api_key,$api_secret)
 	{
 		$this->clearStoredResponse();
 
@@ -205,7 +205,7 @@ class Dfcapi
 	 *
 	 * @return object View Direct Debit Response
 	 */
-	public function ViewDirectDebits($api_key,$api_secret,$dfc_ref)
+	public function ViewDirectDebit($api_key,$api_secret,$dfc_ref)
 	{
 		$this->clearStoredResponse();
 
@@ -236,7 +236,7 @@ class Dfcapi
 	 *
 	 * @return object View Direct Debit Breakdown Response
 	 */
-	public function ViewDirectDebitsBreakdown($api_key,$api_secret,$dfc_ref)
+	public function ViewDirectDebitBreakdown($api_key,$api_secret,$dfc_ref)
 	{
 		$this->clearStoredResponse();
 
@@ -291,7 +291,7 @@ class Dfcapi
 	 *
 	 * @return boolean API Return Status (true/false)
 	 */
-	public function createDirectDebit($api_key,$api_secret,$client_reference,$reference,$title,$first_name,$last_name,$address1,$address2,$address3,$town,$county,$postcode,$amounts,$email,$account_number,$sort_code,$start_from,$installments,$frequency_unit,$frequency_type,$roll_status,$birth_date,$mobile_number,$phone_number,$no_email,$service_description,$bacs_reference,$skip_check=false)
+	public function CreateDirectDebit($api_key,$api_secret,$client_reference,$reference,$title,$first_name,$last_name,$address1,$address2,$address3,$town,$county,$postcode,$amounts,$email,$account_number,$sort_code,$start_from,$installments,$frequency_unit,$frequency_type,$roll_status,$birth_date,$mobile_number,$phone_number,$no_email,$service_description,$bacs_reference,$skip_check=false)
 	{
 
 
@@ -366,7 +366,7 @@ class Dfcapi
 	}
 
 
-		/**
+	/**
 	 * Update Direct Debits  
 	 * 
 	 * @param string $api_key DFC API Key
