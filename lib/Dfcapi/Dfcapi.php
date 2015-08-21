@@ -19,7 +19,7 @@ class Dfcapi
 
 	private $data = array();
 
-	
+
 
 
 	public function __construct($api_url = null)
@@ -86,7 +86,7 @@ class Dfcapi
 			return $this->body->errors;
 	}
 
- 
+
 
 	/**
 	 * Get API Response Code
@@ -107,7 +107,7 @@ class Dfcapi
 	}
 
 	/**
-	 * Get API Details  
+	 * Get API Details
 	 * @return object API Body Object
 	 */
 	public function getDetails()
@@ -149,7 +149,7 @@ class Dfcapi
 	/**
 	 * Internal method to set the stored response
 	 *  - Called after each API Request is made
-	 * 
+	 *
 	 * @param object $response Response Object from Unirest
 	 */
 	private function setStoredResponse($response)
@@ -165,17 +165,17 @@ class Dfcapi
 
 	/**
 	 * Check API Key/Secret for access
-	 * 
+	 *
 	 * @param string $api_key DFC API Key
 	 * @param string $api_secret DFC API Secret
-	 * 
+	 *
 	 * @return boolean API Access Status (true/false)
 	 */
 	public function CheckApiKey($api_key,$api_secret)
 	{
 		$this->clearStoredResponse();
 
-		$response = Unirest::get($this->api_url_checkkey, null, null, $api_key, $api_secret);
+		$response = Unirest\Request::get($this->api_url_checkkey, null, null, $api_key, $api_secret);
 
 		$this->setStoredResponse($response);
 
@@ -198,7 +198,7 @@ class Dfcapi
 
 	/**
 	 * View Direct Debits
-	 * 
+	 *
 	 * @param string $api_key DFC API Key
 	 * @param string $api_secret DFC API Secret
 	 * @param string $dfc_ref DFC Reference Number
@@ -209,8 +209,8 @@ class Dfcapi
 	{
 		$this->clearStoredResponse();
 
-		$response = Unirest::get($this->api_url_viewdd, null, array('dfc_reference'=>$dfc_ref), $api_key, $api_secret);
- 
+		$response = Unirest\Request::get($this->api_url_viewdd, null, array('dfc_reference'=>$dfc_ref), $api_key, $api_secret);
+
 		$this->setStoredResponse($response);
 
 		if(
@@ -229,7 +229,7 @@ class Dfcapi
 
 	/**
 	 * View Direct Debits Breakdown
-	 * 
+	 *
 	 * @param string $api_key DFC API Key
 	 * @param string $api_secret DFC API Secret
 	 * @param string $dfc_ref DFC Reference Number
@@ -240,7 +240,7 @@ class Dfcapi
 	{
 		$this->clearStoredResponse();
 
-		$response = Unirest::get($this->api_url_viewdd_breakdown, null, array('dfc_reference'=>$dfc_ref), $api_key, $api_secret);
+		$response = Unirest\Request::get($this->api_url_viewdd_breakdown, null, array('dfc_reference'=>$dfc_ref), $api_key, $api_secret);
 		$this->setStoredResponse($response);
 
 		if(
@@ -257,37 +257,37 @@ class Dfcapi
 	}
 
 	/**
-	 * Create Direct Debits  
-	 * 
+	 * Create Direct Debits
+	 *
 	 * @param string $api_key DFC API Key
 	 * @param string $api_secret DFC API Secret
 	 * @param string $client_reference DFC Client Reference Number
-	 * @param string $reference 
-	 * @param string $title 
-	 * @param string $first_name 
-	 * @param string $last_name 
-	 * @param string $address1 
-	 * @param string $address2 
-	 * @param string $address3 
-	 * @param string $town 
-	 * @param string $county 
-	 * @param string $postcode 
-	 * @param array $amounts 
-	 * @param string $email 
-	 * @param string $account_number 
-	 * @param string $sort_code 
+	 * @param string $reference
+	 * @param string $title
+	 * @param string $first_name
+	 * @param string $last_name
+	 * @param string $address1
+	 * @param string $address2
+	 * @param string $address3
+	 * @param string $town
+	 * @param string $county
+	 * @param string $postcode
+	 * @param array $amounts
+	 * @param string $email
+	 * @param string $account_number
+	 * @param string $sort_code
 	 * @param string $start_from
 	 * @param string $installments
 	 * @param int $frequency_unit
 	 * @param string $frequncy_type
-	 * @param string $roll_status 
-	 * @param string $birth_date 
-	 * @param string $mobile_number 
-	 * @param string $phone_number 
-	 * @param string $no_email 
+	 * @param string $roll_status
+	 * @param string $birth_date
+	 * @param string $mobile_number
+	 * @param string $phone_number
+	 * @param string $no_email
 	 * @param string $service_description
 	 * @param string $bacs_reference
-	 * @param boolean $skip_check  
+	 * @param boolean $skip_check
 	 *
 	 * @return boolean API Return Status (true/false)
 	 */
@@ -343,12 +343,12 @@ class Dfcapi
 		);
 
 		$this->clearStoredResponse();
-		$response = Unirest::post($this->api_url_createDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
+		$response = Unirest\Request::post($this->api_url_createDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
 		  json_encode(
 		  	$data
 		  )
 		);
- 
+
 		$this->setStoredResponse($response);
 
 		if(
@@ -367,26 +367,26 @@ class Dfcapi
 
 
 	/**
-	 * Update Direct Debits  
-	 * 
+	 * Update Direct Debits
+	 *
 	 * @param string $api_key DFC API Key
 	 * @param string $api_secret DFC API Secret
 	 * @param string $dfc_ref DFC Customer Reference
-	 * @param string $reference 
-	 * @param string $title 
-	 * @param string $first_name 
-	 * @param string $last_name 
-	 * @param string $address1 
-	 * @param string $address2 
-	 * @param string $address3 
-	 * @param string $town 
-	 * @param string $county 
+	 * @param string $reference
+	 * @param string $title
+	 * @param string $first_name
+	 * @param string $last_name
+	 * @param string $address1
+	 * @param string $address2
+	 * @param string $address3
+	 * @param string $town
+	 * @param string $county
 	 * @param string $postcode
-	 * @param string $email 
-	 * @param string $account_number 
+	 * @param string $email
+	 * @param string $account_number
 	 * @param string $sort_code
-	 * @param string $birth_date 
-	 * @param string $mobile_number 
+	 * @param string $birth_date
+	 * @param string $mobile_number
 	 * @param string $phone_number
 	 * @param int $payment_date
 	 * @param string $applyfrom_paydate
@@ -428,7 +428,7 @@ class Dfcapi
 			'mobile'	=> $mobile_number,
 			'email'		=> $email
 		);
-		
+
 		$data['bank'] = array(
 			'account_number'	=>	$account_number,
 			'sort_code'			=>	$sort_code
@@ -442,14 +442,14 @@ class Dfcapi
 			'latepayment'	=> $latepayment,
 			'applyfrom'	=>  $applyfrom ,
 			'applyfrom_paydate'	=> $applyfrom_paydate ,
-			'newamount'	=> $newamount 							
+			'newamount'	=> $newamount
 		);
 
 
 
 
 		$this->clearStoredResponse();
-		$response = Unirest::post($this->api_url_updateDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
+		$response = Unirest\Request::post($this->api_url_updateDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
 		  json_encode(
 		  	$data
 		  )
@@ -474,8 +474,8 @@ class Dfcapi
 
 
 	/**
-	 * Cancel Direct Debits  
-	 * 
+	 * Cancel Direct Debits
+	 *
 	 * @param string $api_key DFC API Key
 	 * @param string $api_secret DFC API Secret
 	 * @param string $dfc_ref DFC Customer Reference
@@ -484,7 +484,7 @@ class Dfcapi
 	 * @return boolean API Cancel Status (true/false)
 	 */	public function CancelDirectDebit($api_key,$api_secret,$dfc_ref,$apply_from)
 	{
-		
+
 		$data['authentication'] = array(
 			'apikey'		=> $api_key,
 			'apisecret'		=> $api_secret,
@@ -492,12 +492,12 @@ class Dfcapi
 		);
 
 		$data['cancel'] = array(
-			'apply_from'   => $apply_from,								
+			'apply_from'   => $apply_from,
 		);
- 
+
 
 		$this->clearStoredResponse();
-		$response = Unirest::post($this->api_url_cancelDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
+		$response = Unirest\Request::post($this->api_url_cancelDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
 		  json_encode(
 		  	$data
 		  )
