@@ -324,9 +324,9 @@ class Dfcapi
 			'email'		=> $email,
 			'no_email'	=> $no_email
 		);
-		$data['bank'] = array(
+		$data['account'] = array(
 			'account_number'	=>	$account_number,
-			'sort_code'			=>	$sort_code
+			'sortcode'			=>	$sort_code
 		);
 		$data['subscription'] = array(
 			'reference'		=> $reference,
