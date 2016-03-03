@@ -4,12 +4,13 @@ use mashape\unirestphp;
 class Dfcapi
 {
 
-	private $api_url_checkkey 		   = 'https://api.debitfinance.co.uk/checkkey';
-	private $api_url_viewdd 		   = 'https://api.debitfinance.co.uk/viewdd';
+	private $api_url_checkkey = 'https://api.debitfinance.co.uk/checkkey';
+	private $api_url_viewdd = 'https://api.debitfinance.co.uk/viewdd';
 	private $api_url_viewdd_breakdown  = 'https://api.debitfinance.co.uk/viewddbreakdown';
-	private $api_url_createDirectDebit = 'https://api.debitfinance.co.uk/setupdd';
-	private $api_url_updateDirectDebit = 'https://api.debitfinance.co.uk/updatedd';
-	private $api_url_cancelDirectDebit = 'https://api.debitfinance.co.uk/canceldd';
+	private $api_url_create_directdebit = 'https://api.debitfinance.co.uk/setupdd';
+	private $api_url_update_directdebitt = 'https://api.debitfinance.co.uk/updatedd';
+	private $api_url_cancel_directdebit = 'https://api.debitfinance.co.uk/canceldd';
+    private $api_url_nextcollectiondate = 'https://api.debitfinance.co.uk/nextcollectiondate';
 
 	private $errors = array();
 	private $response_code = false;
@@ -17,48 +18,33 @@ class Dfcapi
 	private $raw_body = null;
 	private $headers = null;
 
-	private $data = array();
-
-
-
-
-	public function __construct($api_url = null)
-	{
-		if($api_url!==null)
-		{
-			$this->setApiUrl($api_url);
-		}
+	public function setCheckKeyUrl($url) {
+		$this->api_url_checkkey = $url;
 	}
 
-	public function setCheckKeyUrl($checkkey_url)
-	{
-		$this->api_url_checkkey = $checkkey_url;
+	public function setViewDirectDebitUrl($url) {
+		$this->api_url_viewdd = $url;
 	}
 
-	public function setViewDirectDebitUrl($viewdd_url)
-	{
-		$this->api_url_viewdd = $viewdd_url;
+	public function setViewDirectDebitBreakdownUrl($url) {
+		$this->api_url_viewdd_breakdown = $url;
 	}
 
-	public function setViewDirectDebitBreakdownUrl($viewdd_bd_url)
-	{
-		$this->api_url_viewdd_breakdown = $viewdd_bd_url;
+	public function setCreateDirectDebitUrl($url) {
+		$this->api_url_create_directdebit = $url;
 	}
 
-	public function setCreateDirectDebitUrl($setupdd)
-	{
-		$this->api_url_createDirectDebit = $setupdd;
+	public function setUpdateDirectDebitUrl($url) {
+		$this->api_url_update_directdebitt = $url;
 	}
 
-	public function setUpdateDirectDebitUrl($updatedd)
-	{
-		$this->api_url_updateDirectDebit = $updatedd;
+	public function setCancelDirectDebitUrl($url) {
+		$this->api_url_cancel_directdebit = $url;
 	}
 
-	public function setCancelDirectDebitUrl($cancelldd)
-	{
-		$this->api_url_cancelDirectDebit = $cancelldd;
-	}
+    public function setNextCollectionDateUrl($url) {
+        $this->api_url_nextcollectiondate = $url;
+    }
 
 	/**
 	 * Get API Returned Status
@@ -343,7 +329,7 @@ class Dfcapi
 		);
 
 		$this->clearStoredResponse();
-		$response = Unirest\Request::post($this->api_url_createDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
+		$response = Unirest\Request::post($this->api_url_create_directdebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
 		  json_encode(
 		  	$data
 		  )
@@ -449,7 +435,7 @@ class Dfcapi
 
 
 		$this->clearStoredResponse();
-		$response = Unirest\Request::post($this->api_url_updateDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
+		$response = Unirest\Request::post($this->api_url_update_directdebitt, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
 		  json_encode(
 		  	$data
 		  )
@@ -482,7 +468,8 @@ class Dfcapi
 	 * @param string $apply_from
 	 *
 	 * @return boolean API Cancel Status (true/false)
-	 */	public function CancelDirectDebit($api_key,$api_secret,$dfc_ref,$apply_from)
+	 */
+    public function CancelDirectDebit($api_key,$api_secret,$dfc_ref,$apply_from)
 	{
 
 		$data['authentication'] = array(
@@ -497,10 +484,15 @@ class Dfcapi
 
 
 		$this->clearStoredResponse();
-		$response = Unirest\Request::post($this->api_url_cancelDirectDebit, array( "Content-Type" => "application/json", "Accept" => "application/json" ),
-		  json_encode(
-		  	$data
-		  )
+		$response = Unirest\Request::post(
+            $this->api_url_cancel_directdebit,
+            [
+                "Content-Type" => "application/json",
+                "Accept" => "application/json"
+            ],
+            json_encode(
+                $data
+            )
 		);
 
 		$this->setStoredResponse($response);
@@ -519,4 +511,33 @@ class Dfcapi
 
 	}
 
+    /**
+     * Get the Next Collection Date when available
+     *
+     * @return mixed
+     */
+    public function NextCollectionDate()
+    {
+        $this->clearStoredResponse();
+        $response = Unirest\Request::get(
+            $this->api_url_nextcollectiondate,
+            [
+                "Content-Type" => "application/json",
+                "Accept" => "application/json"
+            ]
+        );
+
+        $this->setStoredResponse($response);
+
+        if(
+            isset($response->code)
+            && $response->code===200
+            && isset($response->body->status)
+            && $response->body->status==='ok'
+        ) {
+            return $response->body->details->next_collection_date;
+        }
+
+        return false;
+    }
 }
